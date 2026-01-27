@@ -1,0 +1,104 @@
+<!-- TOP BAR -->
+<div class="qbar">
+  <div class="qbar-left">
+    <button class="back-btn" (click)="backToDashboard()">Quay Lại</button>
+  </div>
+</div>
+
+<div class="exam-wrap">
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- LOADING / NO DATA -->
+    <div class="qbody" *ngIf="loading">
+      Đang tải đề...
+    </div>
+
+    <div class="qbody" *ngIf="!loading && !hasQuestions">
+      Không có câu hỏi cho hạng {{ license }}. Vui lòng thử hạng khác.
+    </div>
+
+    <!-- CONTENT -->
+    <ng-container *ngIf="!loading && currentQ as q">
+      <div class="qbar">
+        <div class="qbar-left">
+          <span class="bad-x">✖</span>
+          <!-- BE của bạn trả topic (không có q.type) -->
+          <span class="qtype">{{ q.topic }}</span>
+        </div>
+        <div class="pin">☆</div>
+      </div>
+
+      <div class="qbody">
+        <!-- BE trả content (không có q.text) -->
+        <div class="qtext">{{ q.content }}</div>
+
+        <!-- (optional) nếu có hình -->
+        <div *ngIf="q.imageUrl" class="qimg">
+          <img [src]="q.imageUrl" alt="question image" />
+        </div>
+
+        <div class="opts">
+          <label class="opt" *ngFor="let a of q.answers; let i = index; trackBy: trackByAnswerId">
+            <input type="radio" [name]="'q_' + q.id" [value]="a.id" [(ngModel)]="selected[currentIndex]"
+              [ngModelOptions]="{ standalone: true }" [disabled]="submitted" />
+
+            <div class="opt-text">
+              <div class="opt-label">{{ optionLabel(i) }}.</div>
+
+              <ng-container *ngIf="splitNumberedOptions(a.content) as lines; else oneLine">
+                <div class="opt-multi">
+                  <div class="opt-line" *ngFor="let line of lines">{{ line }}</div>
+                </div>
+              </ng-container>
+
+              <ng-template #oneLine>
+                <div class="opt-one">{{ a.content }}</div>
+              </ng-template>
+            </div>
+          </label>
+        </div>
+
+        <!-- feedback (chỉ hiện sau submit; explanation bạn lấy từ BE khi submit) -->
+        <div class="feedback" *ngIf="submitted">
+          <div class="fb-title">Giải thích:</div>
+          <div class="fb-line">
+            <span class="bad-x">✖</span>
+            <span>{{ q.explanation || 'Xem giải thích ở trang kết quả.' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <button class="nav-btn" (click)="prev()" [disabled]="isFirst || loading">
+          Trước
+        </button>
+
+        <button class="nav-btn primary" (click)="next()" [disabled]="isLast || loading">
+          Tiếp
+        </button>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="side">
+    <div class="timer" [class.warn]="isTimeWarning">
+      <div class="timer-label">Thời gian còn lại</div>
+      <div class="timer-value">{{ timeText }}</div>
+    </div>
+
+    <div class="navbox">
+      <button class="num" *ngFor="let _ of questions; let i = index" [class.current]="navState(i) === 'current'"
+        [class.answered]="navState(i) === 'answered'" (click)="goTo(i)" [disabled]="loading">
+        {{ i + 1 }}
+      </button>
+    </div>
+
+    <button class="submit" (click)="submit()" [disabled]="loading || !hasQuestions">
+      NỘP BÀI
+    </button>
+
+    <div class="note">{{ notSavedCount }} câu chưa lưu lên máy chủ</div>
+  </div>
+</div>

@@ -1,0 +1,276 @@
+.exam-wrap {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 18px;
+    padding: 18px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.main {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+}
+
+.qbar {
+    background: #efefef;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.qbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #333;
+}
+
+.bad-x {
+    color: #e11d48;
+    font-weight: 900;
+}
+
+.pin {
+    color: #111;
+    opacity: .7;
+    font-size: 18px;
+}
+
+.qbody {
+    padding: 18px 16px 12px;
+}
+
+.qtext {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.opts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+}
+
+.opt input {
+    margin-top: 3px;
+}
+
+.opt.correct {
+    background: #e8f7ee;
+    border-color: #16a34a;
+}
+
+.opt.wrong {
+    background: #f8d7da;
+    border-color: #e11d48;
+}
+
+.opt-text {
+    line-height: 1.35;
+}
+
+.feedback {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #eee;
+}
+
+.fb-title {
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.fb-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #333;
+}
+
+/* ✅ EDIT: bottom có 2 nút Trước / Tiếp */
+.bottom{
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between; /* ✅ EDIT */
+  align-items: center;            /* ✅ EDIT */
+  gap: 10px;
+  border-top: 1px solid #eee;
+}
+
+/* ✅ EDIT: giữ style nút cũ .next nhưng đổi thành dùng chung cho 2 nút */
+.nav-btn {                  /* ✅ EDIT (mới) */
+    height: 38px;
+    padding: 0 18px;
+    border: 1px solid #2f6fed;
+    background: #fff;
+    color: #2f6fed;
+    font-weight: 900;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ✅ EDIT: nút primary (Tiếp) */
+.nav-btn.primary {          /* ✅ EDIT (mới) */
+    background: #2f6fed;
+    color: #fff;
+    border-color: #2f6fed;
+}
+
+/* ✅ EDIT: disable */
+.nav-btn:disabled {         /* ✅ EDIT (mới) */
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+/* ✅ EDIT: nếu bạn vẫn dùng class .next ở HTML thì vẫn đẹp */
+.next {                     /* ✅ EDIT (giữ lại để không vỡ nếu HTML đang dùng .next) */
+    height: 38px;
+    padding: 0 18px;
+    border: 1px solid #2f6fed;
+    background: #fff;
+    color: #2f6fed;
+    font-weight: 900;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.navbox {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    padding: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #cfcfcf;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+/* ✅ EDIT: ô current giống hình (vuông bo góc) */
+.num.current {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #fff;
+    border-radius: 6px;     /* ✅ EDIT: từ 4px -> 6px cho đồng bộ */
+}
+
+.num.answered {
+    border-color: #999;
+    background: #fff;
+}
+
+.submit {
+    height: 42px;
+    border: none;
+    border-radius: 4px;
+    background: #1976d2;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.note {
+    font-size: 12px;
+    color: #777;
+    text-align: right;
+}
+
+.timer{
+  background:#fff;
+  border:1px solid #e6e6e6;
+  padding: 12px;
+  border-radius: 6px;
+  text-align:center;
+}
+
+.timer-label{
+  font-size: 12px;
+  color:#64748b;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.timer-value{
+  font-size: 22px;
+  font-weight: 900;
+  color:#111827;
+  letter-spacing: 1px;
+}
+
+/* còn <= 5 phút thì đổi màu */
+.timer.warn{
+  border-color:#ef4444;
+  background:#fff5f5;
+}
+.timer.warn .timer-value{
+  color:#ef4444;
+}
+
+.back-btn{
+  border: 1px solid #cfd6e1;
+  background:#fff;
+  color:#111827;
+  font-weight: 800;
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.back-btn:hover{ filter: brightness(.98); }
+
+
+.subopt {
+  margin-left: 18px;
+  line-height: 1.5;
+}
+
+
+
+
+
+.opt-text {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.opt-label {
+  min-width: 26px;       /* để A. thẳng hàng */
+  font-weight: 600;
+}
+
+.opt-multi, .opt-one {
+  line-height: 1.55;
+}
+
+.opt-line {
+  margin: 2px 0;
+}

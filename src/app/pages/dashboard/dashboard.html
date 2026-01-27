@@ -1,0 +1,86 @@
+<div class="nav">
+  <a routerLink="/intro" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    Giới thiệu
+  </a>
+
+  <a routerLink="/dashboard" routerLinkActive="active">
+    Khoá Học
+  </a>
+</div>
+
+<div class="container">
+
+
+  <!-- PRACTICE CARD -->
+  <div class="practice-card">
+    <div class="pc-left">
+      <div class="pc-title">Chọn hạng lái xe để luyện tập</div>
+      <div class="pc-sub">Chọn đúng hạng của bạn để làm bộ câu hỏi phù hợp.</div>
+
+      <div class="pc-control">
+        <span class="pc-icon">🚗</span>
+
+        <div class="pc-select-wrap">
+          <select class="pc-select" [(ngModel)]="selectedLicense" (ngModelChange)="onLicenseChange()">
+            <option *ngFor="let l of licenses" [value]="l.code">
+              {{ l.name }}
+            </option>
+          </select>
+
+          <span class="pc-caret">▾</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="pc-btn" (click)="startPractice()">
+      <span class="pc-btn-icon">▶</span>
+      Bắt đầu luyện
+    </button>
+  </div>
+
+  <h2 class="section-title">Đề luyện tập</h2>
+
+  <!-- GRID ĐỀ -->
+  <div class="set-grid">
+    <div class="set-card" *ngFor="let s of practiceSets" (click)="openSet(s.id)">
+      <div class="set-tag">{{ s.tag }}</div>
+
+      <div class="set-title">{{ s.title }}</div>
+
+      <div class="set-bottom">
+        <div class="set-meta">
+          <span class="chip">{{ s.questions }} câu</span>
+          <span class="chip">{{ s.minutes }} phút</span>
+        </div>
+
+        <!-- nút nhỏ trong card: stopPropagation để không bị click card 2 lần -->
+        <button class="set-btn" type="button" (click)="openSet(s.id); $event.stopPropagation()">
+          Đề #{{ s.id }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL POPUP (đặt ngoài container để phủ full màn) ===== -->
+<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-title">
+      {{ (selectedSet?.tag || '').toUpperCase() }} - ĐỀ {{ selectedSet?.id }}
+    </div>
+
+    <div class="modal-sub">
+      <span><b>Số câu:</b> {{ selectedSet?.questions }} câu</span>
+      <span><b>Thời gian làm bài:</b> {{ selectedSet?.minutes }} phút</span>
+    </div>
+
+    <div class="modal-scope">
+      <div class="scope-title">Phạm vi kiểm tra:</div>
+      <div class="scope-desc">Tổng hợp câu hỏi theo hạng {{ selectedLicense }}</div>
+    </div>
+
+    <button class="modal-btn" (click)="startExam()">
+      BẮT ĐẦU LÀM BÀI
+    </button>
+  </div>
+</div>

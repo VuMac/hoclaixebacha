@@ -1,0 +1,65 @@
+<div class="bg">
+  <div class="card">
+    <h1 class="title">ĐĂNG NHẬP</h1>
+    <div class="subtitle">TÊN ĐĂNG NHẬP LÀ CCCD/CMT</div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <!-- Username -->
+      <div class="field">
+        <div class="input-wrap" [class.invalid]="username?.touched && username?.invalid">
+          <span class="icon left">👤</span>
+          <input
+            type="text"
+            placeholder="Tên đăng nhập"
+            formControlName="username"
+            autocomplete="username"
+          />
+          <span class="icon right" title="Thông tin">ⓘ</span>
+        </div>
+
+        <div class="error" *ngIf="username?.touched && username?.hasError('required')">
+          MÃ ĐĂNG NHẬP KHÔNG ĐƯỢC ĐỂ TRỐNG
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="field">
+        <div class="input-wrap" [class.invalid]="password?.touched && password?.invalid">
+          <span class="icon left">🔒</span>
+
+          <input
+            [type]="hidePassword ? 'password' : 'text'"
+            placeholder="Nhập mật khẩu"
+            formControlName="password"
+            autocomplete="current-password"
+          />
+
+          <button
+            type="button"
+            class="icon-btn right"
+            (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="hidePassword ? 'Hiện mật khẩu' : 'Ẩn mật khẩu'"
+            title="Hiện/Ẩn mật khẩu"
+          >
+            {{ hidePassword ? '🙈' : '👁️' }}
+          </button>
+        </div>
+
+        <div class="error" *ngIf="password?.touched && password?.hasError('required')">
+          MẬT KHẨU KHÔNG ĐƯỢC ĐỂ TRỐNG
+        </div>
+      </div>
+
+      <div class="forgot">
+        <a (click)="goForgot()">BẠN ĐÃ QUÊN MẬT KHẨU?</a>
+      </div>
+
+      <button class="btn" type="submit" [disabled]="loading">
+        <span class="check">✓</span>
+        {{ loading ? 'Đang đăng nhập...' : 'Đăng nhập' }}
+      </button>
+    </form>
+  </div>
+
+  <footer class="footer">Copyright @ laixebacha</footer>
+</div>

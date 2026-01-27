@@ -1,0 +1,104 @@
+.page{
+  min-height: calc(100vh - 40px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+  background:#fff;
+}
+
+.card{
+  width: 720px;
+  max-width: calc(100vw - 40px);
+  text-align:center;
+  position: relative;
+  padding: 28px 24px 22px;
+}
+
+.icon-edit{
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 4px;
+  font-size: 18px;
+  opacity: .8;
+}
+
+.title{
+  margin: 10px 0 6px;
+  font-size: 30px;
+  font-weight: 700;
+  color:#111827;
+}
+
+.sub{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 8px;
+  color:#111827;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  font-weight: 700;
+  margin: 6px 0 8px;
+}
+.status .dot{
+  font-size: 14px;
+  line-height: 1;
+}
+.status.fail{ color:#ef4444; }
+.status.pass{ color:#16a34a; }
+
+.score{
+  font-size: 28px;
+  font-weight: 800;
+  color:#f59e0b; /* vàng cam giống ảnh */
+  margin: 2px 0 10px;
+}
+.score-num{ font-size: 30px; }
+.score-sep{ opacity:.8; }
+.score-total{ opacity:.9; }
+
+.meta{
+  margin-top: 6px;
+  color:#111827;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.muted{ color:#6b7280; font-weight: 400; }
+
+.actions{
+  margin-top: 16px;
+  display:flex;
+  justify-content:center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor:pointer;
+  border: 1px solid transparent;
+}
+
+.btn.outline{
+  background:#fff;
+  border-color:#2563eb;
+  color:#2563eb;
+}
+
+.btn.solid{
+  background:#2563eb;
+  color:#fff;
+}
+.btn:hover{ filter: brightness(.98); }

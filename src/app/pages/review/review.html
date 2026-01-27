@@ -1,0 +1,92 @@
+<div class="wrap" *ngIf="details.length">
+  <div class="top">
+    <button class="back" (click)="backToResult()">← Quay lại kết quả</button>
+
+    <div class="meta">
+      <div class="meta-title">Xem chi tiết bài làm</div>
+      <div class="meta-sub">
+        Hạng: <b>{{ result?.license }}</b> • Đề: <b>#{{ result?.set }}</b>
+        • Đúng: <b>{{ result?.correct }}</b>/<b>{{ result?.total }}</b>
+      </div>
+    </div>
+
+    <button class="retry" (click)="retry()">Làm lại</button>
+  </div>
+
+  <div class="exam-wrap">
+    <div class="main">
+      <div class="qbar">
+        <div class="qbar-left">
+          <span class="bad-x" [class.ok]="current.isCorrect">
+            {{ current.isCorrect ? '✓' : '✖' }}
+          </span>
+          <span>Câu hỏi chọn một đáp án</span>
+        </div>
+        <div class="pin">☆</div>
+      </div>
+
+      <div class="qbody">
+        <!-- ✅ Câu hỏi -->
+        <div class="qtext">
+          {{ currentIndex + 1 }}. {{ current.questionContent || '(Chưa có nội dung câu hỏi)' }}
+        </div>
+
+       <img *ngIf="current.imageUrl" [src]="current.imageUrl" class="qimg" />
+
+        <!-- ✅ Đáp án -->
+        <div class="opts" *ngIf="current.answers?.length; else noAnswers">
+          <label
+            class="opt"
+            *ngFor="let a of current.answers; let idx = index; trackBy: trackByAnswerId"
+            [class.correct]="isCorrectAnswer(a)"
+            [class.wrong]="isChosen(a.id) && !isCorrectAnswer(a)"
+          >
+            <input type="radio" disabled [checked]="isChosen(a.id)" />
+            <div class="opt-text">
+              {{ idx + 1 }} - {{ a.content }}
+
+              <span *ngIf="isCorrectAnswer(a)" class="badge correct">Đáp án đúng</span>
+              <span *ngIf="isChosen(a.id)" class="badge chosen">Bạn chọn</span>
+            </div>
+          </label>
+        </div>
+
+        <ng-template #noAnswers>
+          <div style="padding:10px 0;color:#6b7280">Không có đáp án (lỗi dữ liệu).</div>
+        </ng-template>
+
+        <!-- ✅ Giải thích -->
+        <div class="feedback">
+          <div class="fb-title">Câu hỏi phản hồi:</div>
+          <div class="fb-line">
+            <span class="fb-badge" [class.ok]="current.isCorrect">
+              {{ current.isCorrect ? '✓' : '✖' }}
+            </span>
+            <div>{{ explanationText }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="navbox">
+        <button
+          class="num"
+          *ngFor="let d of details; let i = index"
+          [class.current]="navState(i)==='current'"
+          [class.correct]="navState(i)==='correct'"
+          [class.wrong]="navState(i)==='wrong'"
+          (click)="goTo(i)"
+        >
+          {{ i + 1 }}
+        </button>
+      </div>
+
+      <div class="legend">
+        <div class="lg"><span class="dot correct"></span> Đúng</div>
+        <div class="lg"><span class="dot wrong"></span> Sai</div>
+        <div class="lg"><span class="dot current"></span> Đang xem</div>
+      </div>
+    </div>
+  </div>
+</div>

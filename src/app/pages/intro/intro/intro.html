@@ -1,0 +1,141 @@
+<div class="page">
+  <!-- TOPBAR giống web mẫu -->
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <div class="brand__logo">BH</div>
+        <div class="brand__text">
+          <div class="brand__name">CÔNG TY CỔ PHẦN ĐT & PT BẮC HÀ</div>
+          <div class="brand__sub">TRUNG TÂM ĐÀO TẠO VÀ SÁT HẠCH LÁI XE BẮC HÀ</div>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <a class="menu__item active">Giới thiệu</a>
+
+        <a class="menu__item" href="#courses">Khóa học</a>
+
+        <a class="menu__item">Tin tức</a>
+        <a class="menu__item">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO banner đẹp (dùng ảnh) -->
+
+
+  <!-- CONTENT -->
+  <main class="container">
+    <!-- Cards -->
+    <section class="block">
+      <div class="block__head">
+        <h2>Các hạng xe phổ biến</h2>
+        <p>Chọn một hạng để xem mô tả nhanh và vào luyện đề.</p>
+      </div>
+
+      <div class="quick-grid">
+        <button class="quick-item" *ngFor="let c of cards" type="button" (click)="go(c.cta.link)">
+          <span class="quick-badge" *ngIf="c.badge">{{ c.badge }}</span>
+
+          <span class="quick-icon">{{ c.icon }}</span>
+
+          <span class="quick-title">{{ c.title }}</span>
+          <span class="quick-sub">{{ c.subtitle }}</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- COURSES (giữ phần bạn đã làm) -->
+    <section class="courses-wrap" id="courses">
+      <div class="courses-head">
+        <div class="courses-title">CÁC KHÓA HỌC</div>
+        <div class="courses-line">
+          <span></span><i></i><span></span>
+        </div>
+      </div>
+
+      <div class="courses-tabs">
+        <button class="tab" [class.active]="activeCourse === 'B_MT'" (click)="setCourse('B_MT')">
+          KHÓA HỌC HẠNG B SỐ SÀN
+        </button>
+        <div class="tab-sep">|</div>
+        <button class="tab" [class.active]="activeCourse === 'B_AT'" (click)="setCourse('B_AT')">
+          KHÓA HỌC HẠNG B SỐ TỰ ĐỘNG
+        </button>
+        <div class="tab-sep">|</div>
+        <button class="tab" [class.active]="activeCourse === 'C1'" (click)="setCourse('C1')">
+          KHÓA HỌC HẠNG C1
+        </button>
+      </div>
+
+      <div class="courses-body">
+        <div class="left">
+          <div class="img-frame">
+            <img [src]="course.image" alt="course" />
+          </div>
+        </div>
+
+        <div class="right">
+          <h2 class="main-title">{{ course.title }}</h2>
+
+          <div class="lines">
+            <div><b>Thời gian học:</b> {{ course.duration }}.</div>
+            <div><b>Thực Hành Lái Xe DAT:</b> {{ course.datKm }}.</div>
+            <div><b>Hình thức học:</b> {{ course.mode }}.</div>
+            <div><b>Học phí:</b> {{ course.fee }}.</div>
+            <div><b>Sân Thi Sát hạch:</b> {{ course.examYard }}.</div>
+          </div>
+
+          <div class="slogan">{{ course.slogan }}</div>
+
+          <div class="badges">
+            <div class="badge price">
+              <div class="badge-top">GIÁ CHỈ TỪ</div>
+              <div class="badge-big">{{ course.price }}</div>
+            </div>
+
+            <div class="badge commit">
+              <div class="badge-top">CAM KẾT</div>
+              <div class="badge-big">{{ course.commit1 }}</div>
+            </div>
+
+            <div class="badge commit">
+              <div class="badge-top">CAM KẾT</div>
+              <div class="badge-big">{{ course.commit2 }}</div>
+            </div>
+          </div>
+
+          <form class="form" (submit)="submitConsult($event)">
+            <input class="input" placeholder="Họ tên (*)" [(ngModel)]="consultName" name="consultName" required />
+            <div class="divider"></div>
+            <input class="input" placeholder="Điện thoại (*)" [(ngModel)]="consultPhone" name="consultPhone" required />
+            <button class="btn btn--primary" type="submit">Đăng ký tư vấn</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info -->
+    <section class="block">
+      <div class="info">
+        <div class="info__box">
+          <h2>Cách học hiệu quả</h2>
+          <ul>
+            <li>Làm đề theo bộ câu hỏi → xem giải thích câu sai</li>
+            <li>Ôn biển báo + sa hình (nếu có) theo từng chủ đề</li>
+            <li>Luyện tốc độ làm bài để quen áp lực thời gian</li>
+          </ul>
+
+          <div class="hero__actions">
+            <button class="btn btn--primary" (click)="go('/dashboard')">Vào danh sách đề</button>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">© Hệ thống luyện thi GPLX</div>
+  </footer>
+</div>

@@ -1,0 +1,208 @@
+/* =========================
+   NỀN TOÀN MÀN HÌNH (BACKGROUND)
+   ========================= */
+
+/* Container bao toàn bộ trang login */
+.bg{
+  min-height: 100vh; /* cao tối thiểu = 100% chiều cao màn hình */
+  display:flex; /* dùng flex để canh giữa card */
+  align-items:center; /* canh giữa theo chiều dọc */
+  justify-content:center; /* canh giữa theo chiều ngang */
+  padding: 24px; /* chừa khoảng đệm để card không dính sát màn hình trên thiết bị nhỏ */
+  background: linear-gradient(120deg, #1fa6b7 0%, #7fd0de 55%, #bfe9f2 100%); /* nền gradient */
+  position: relative; /* để footer position:absolute bám theo .bg */
+  overflow: hidden; /* tránh bị tràn khi có hiệu ứng/khối trang trí */
+}
+
+
+/* =========================
+   CARD LOGIN Ở GIỮA
+   ========================= */
+
+/* Khung trắng ở giữa */
+.card{
+  width: 460px; /* độ rộng chuẩn desktop */
+  max-width: calc(100vw - 48px); /* responsive: không vượt quá màn hình (trừ padding 24*2) */
+  background: #fff; /* nền trắng */
+  border: 1px solid #e6e6e6; /* viền xám nhạt */
+  box-shadow: 0 10px 20px rgba(0,0,0,.15); /* đổ bóng cho nổi */
+  padding: 28px 34px 26px; /* padding trong card */
+  text-align:center; /* canh giữa cho tiêu đề/nút */
+}
+
+/* Tiêu đề "ĐĂNG NHẬP" */
+.title{
+  margin: 0 0 10px 0; /* bỏ margin trên, chừa margin dưới */
+  font-size: 28px; /* cỡ chữ lớn */
+  letter-spacing: 1px; /* giãn chữ nhẹ */
+  font-weight: 800; /* đậm */
+}
+
+/* Dòng mô tả: "TÊN ĐĂNG NHẬP LÀ CCCD/CMT" */
+.subtitle{
+  font-size: 14px; /* nhỏ hơn title */
+  font-weight: 700; /* đậm vừa */
+  color: #444; /* màu chữ xám đậm */
+  margin-bottom: 18px; /* tạo khoảng cách xuống form */
+  letter-spacing: .4px; /* giãn chữ nhẹ */
+}
+
+
+/* =========================
+   CỤM INPUT (FIELD)
+   ========================= */
+
+/* Mỗi field gồm: input-wrap + error message */
+.field{
+  margin: 14px 0; /* khoảng cách trên dưới giữa các field */
+  text-align:left; /* phần input/error canh trái (trong khi card canh giữa) */
+}
+
+/* Khung bọc input (có icon trái/phải) */
+.input-wrap{
+  display:flex; /* để icon + input nằm cùng hàng */
+  align-items:center; /* canh giữa theo chiều dọc */
+  border: 1px solid #cfcfcf; /* viền mặc định */
+  border-radius: 3px; /* bo góc nhẹ */
+  height: 40px; /* chiều cao input */
+  padding: 0 10px; /* padding trái phải */
+  gap: 8px; /* khoảng cách giữa icon và input */
+  background:#fff; /* nền trắng */
+}
+
+/* Khi input invalid -> đổi viền sang đỏ */
+.input-wrap.invalid{
+  border-color: #e74c3c;
+}
+
+/* Icon chung (trái/phải) */
+.icon{
+  font-size: 14px; /* cỡ icon */
+  opacity: .75; /* hơi mờ để không quá nổi */
+  user-select:none; /* tránh bị bôi đen khi kéo chuột */
+}
+
+/* Icon trái: set width cố định để canh đều */
+.icon.left{
+  width: 18px;
+  display:flex;
+  justify-content:center;
+}
+
+/* Icon phải: đẩy về cuối hàng */
+.icon.right{
+  margin-left:auto;
+}
+
+/* Nút icon (ví dụ nút ẩn/hiện mật khẩu) */
+.icon-btn{
+  border:none; /* bỏ viền mặc định của button */
+  background:transparent; /* nền trong suốt */
+  cursor:pointer; /* con trỏ tay */
+  padding: 0; /* bỏ padding mặc định */
+  font-size: 16px; /* icon to hơn chút */
+  opacity: .85; /* hơi mờ */
+}
+.icon-btn:hover{
+  opacity: 1; /* hover thì rõ lên */
+}
+
+/* Input text/password */
+input{
+  border:none; /* bỏ viền input (vì đã có viền ở input-wrap) */
+  outline:none; /* bỏ outline khi focus (nếu muốn focus đẹp hơn thì thêm box-shadow riêng) */
+  flex:1; /* chiếm hết phần còn lại trong hàng */
+  height: 100%; /* cao bằng input-wrap */
+  font-size: 14px; /* cỡ chữ */
+}
+
+
+/* =========================
+   ERROR MESSAGE (VALIDATION)
+   ========================= */
+
+/* Dòng báo lỗi đỏ dưới input */
+.error{
+  margin-top: 6px; /* cách input một chút */
+  font-size: 11px; /* nhỏ */
+  color: #e53935; /* đỏ */
+  font-weight: 800; /* đậm */
+  text-transform: uppercase; /* viết hoa toàn bộ */
+  text-align:center; /* canh giữa giống hình mẫu */
+}
+
+
+/* =========================
+   LINK QUÊN MẬT KHẨU
+   ========================= */
+
+.forgot{
+  margin: 14px 0 18px; /* khoảng cách trên/dưới */
+  text-align:right; /* canh phải */
+  font-size: 12px; /* chữ nhỏ */
+}
+.forgot a{
+  color:#1f6fb8; /* màu xanh link */
+  cursor:pointer; /* con trỏ tay */
+  text-decoration:none; /* bỏ gạch chân */
+  font-weight: 700; /* đậm */
+}
+.forgot a:hover{
+  text-decoration: underline; /* hover thì gạch chân */
+}
+
+
+/* =========================
+   NÚT ĐĂNG NHẬP
+   ========================= */
+
+.btn{
+  width: 160px; /* độ rộng nút */
+  height: 38px; /* chiều cao nút */
+  border:none; /* bỏ viền */
+  border-radius: 3px; /* bo góc */
+  background:#0b61d1; /* nền xanh */
+  color:#fff; /* chữ trắng */
+  font-weight: 800; /* chữ đậm */
+  cursor:pointer; /* con trỏ tay */
+  display:inline-flex; /* để icon + chữ canh hàng ngang */
+  align-items:center; /* canh giữa theo dọc */
+  justify-content:center; /* canh giữa theo ngang */
+  gap:8px; /* khoảng cách giữa icon check và text */
+}
+
+/* Khi disabled (loading / form invalid nếu bạn muốn) */
+.btn:disabled{
+  opacity:.7; /* mờ đi */
+  cursor:not-allowed; /* con trỏ cấm */
+}
+
+/* Icon check tròn bên trái nút */
+.check{
+  display:inline-flex; /* để canh giữa dấu ✓ */
+  width: 18px;
+  height: 18px;
+  border-radius: 50%; /* tròn */
+  background: rgba(255,255,255,.15); /* nền trắng trong suốt */
+  align-items:center; /* canh giữa */
+  justify-content:center; /* canh giữa */
+  font-size: 12px; /* cỡ dấu ✓ */
+}
+
+
+/* =========================
+   FOOTER DƯỚI CÙNG
+   ========================= */
+
+/* Thanh footer cố định dưới đáy màn hình */
+.footer{
+  position:absolute; /* bám theo .bg (vì .bg là relative) */
+  left:0; right:0; bottom:0; /* kéo full ngang dưới cùng */
+  height: 54px; /* chiều cao footer */
+  background: rgba(0,0,0,.35); /* nền đen trong suốt */
+  color:#fff; /* chữ trắng */
+  display:flex; /* canh giữa text */
+  align-items:center; /* giữa dọc */
+  justify-content:center; /* giữa ngang */
+  font-size: 13px; /* cỡ chữ */
+}

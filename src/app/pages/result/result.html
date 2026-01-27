@@ -1,0 +1,62 @@
+<div class="page" *ngIf="result; else noData">
+    <div class="card">
+        <div class="icon-edit">✎</div>
+
+        <h1 class="title">Kiểm tra</h1>
+
+        <div class="sub">
+            <span class="doc">📄</span>
+            <span>Kết quả bài làm</span>
+        </div>
+
+        <div class="status" [class.fail]="!pass" [class.pass]="pass">
+            <span class="dot">✖</span>
+            <span>{{ pass ? 'Đạt' : 'Chưa đạt' }}</span>
+        </div>
+
+        <div class="score">
+            <span class="score-num">{{ result?.correct || 0 }}</span>
+            <span class="score-sep">/</span>
+            <span class="score-total">{{ result?.total || 30 }}</span>
+        </div>
+
+        <div class="meta">
+            <div>Điểm để đạt: <b>{{ result?.passMark }}</b>/<b>{{ result?.total }}</b> câu đúng</div>
+            <div class="muted" *ngIf="result?.criticalWrong">
+                * Rớt do sai <b>câu điểm liệt</b>.
+            </div>
+
+            <div>
+                <b>Điểm thi gần nhất:</b> <b>{{ latestScore }}</b>
+                <span class="muted">(cách đây {{ latestAgoText }})</span>
+            </div>
+
+            <div>
+                <b>Điểm thi cao nhất:</b> <b>{{ bestScore }}</b>
+            </div>
+
+            <div class="muted">
+                (Đã làm: <b>{{ attemptCount }}</b>/{{ totalAttemptsLimit }} lần làm bài)
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn ghost" (click)="goDashboard()">← Chọn đề khác</button>
+
+            <button class="btn outline" (click)="viewDetail()">Xem chi tiết bài làm của bạn</button>
+            <button class="btn solid" (click)="retry()">Làm lại</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #noData>
+    <div class="page">
+        <div class="card">
+            <h1 class="title">Kiểm tra</h1>
+            <div class="meta muted">Chưa có kết quả. Hãy làm bài trước nhé.</div>
+            <div class="actions">
+                <button class="btn solid" (click)="retry()">Vào làm bài</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
