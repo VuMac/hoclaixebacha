@@ -23,13 +23,11 @@ type PracticeSet = {
 export class DashboardPage {
   licenses: License[] = [
     // XE MÁY
-    { code: 'A1', name: 'A1 - Xe mô tô ≤ 125cc' },
-    { code: 'A', name: 'A - Xe mô tô trên 125cc' },
+    { code: 'A', name: 'A - Xe máy' },
     { code: 'B1_MOTO', name: 'B1 (mô tô 3 bánh)' },
 
     // Ô TÔ CON
-    { code: 'B1', name: 'B1 - Ô tô số tự động (không hành nghề)' },
-    { code: 'B2', name: 'B2 - Ô tô số sàn (được hành nghề)' },
+    { code: 'B', name: 'B - Ô tô' },
 
     // XE TẢI
     { code: 'C1', name: 'C1 - Xe tải ≤ 7.5 tấn' },
@@ -56,8 +54,8 @@ export class DashboardPage {
     if (c === 'A') return 'A2';
     if (c === 'B1_MOTO') return 'A3';
 
-    // ô tô con: gộp B1/B2 -> B
-    if (c === 'B1' || c === 'B2') return 'B';
+    // ô tô con: B
+    if (c === 'B') return 'B';
 
     // tải/khách
     if (c === 'C1') return 'C';
@@ -71,7 +69,7 @@ export class DashboardPage {
     return c;
   }
 
-  selectedLicense = 'B2';
+  selectedLicense = 'B';
   practiceSets: PracticeSet[] = [];
 
   isModalOpen = false;

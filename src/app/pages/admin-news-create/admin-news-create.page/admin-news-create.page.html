@@ -1,0 +1,39 @@
+<div style="max-width:900px;margin:24px auto;padding:0 16px;">
+  <h1>Đăng tin tức</h1>
+
+  <div style="display:grid;gap:12px;background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:16px;padding:16px;">
+    <label>
+      <div>Tiêu đề</div>
+      <input [(ngModel)]="form.title" style="width:100%;height:40px;padding:0 10px;">
+    </label>
+
+    <label>
+      <div>Slug (có thể để trống)</div>
+      <input [(ngModel)]="form.slug" style="width:100%;height:40px;padding:0 10px;">
+    </label>
+
+    <label>
+      <div>Mô tả ngắn</div>
+      <textarea [(ngModel)]="form.excerpt" rows="3" style="width:100%;padding:10px;"></textarea>
+    </label>
+
+    <label>
+      <div>Ảnh cover (URL)</div>
+      <input [(ngModel)]="form.coverImage" style="width:100%;height:40px;padding:0 10px;">
+    </label>
+
+    <label>
+      <div>Nội dung (HTML)</div>
+      <textarea [(ngModel)]="form.contentHtml" rows="12" style="width:100%;padding:10px;"></textarea>
+    </label>
+
+    <label style="display:flex;align-items:center;gap:10px;">
+      <input type="checkbox" [(ngModel)]="form.isPublished">
+      Đăng ngay (Published)
+    </label>
+
+    <button (click)="submit()" [disabled]="loading" style="height:44px;border-radius:12px;border:0;background:#22307f;color:#fff;font-weight:800;">
+      {{ loading ? 'Đang đăng...' : 'Đăng bài' }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="wrap">
+  <a class="back" routerLink="/news">← Quay lại Tin tức</a>
+
+  <div *ngIf="loading" class="box">Đang tải...</div>
+  <div *ngIf="error" class="box error">{{ error }}</div>
+
+  <ng-container *ngIf="!loading && data">
+    <h1 class="title">{{ data.title }}</h1>
+    <div class="meta">
+      <span>{{ data.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+    </div>
+
+    <div class="thumb" *ngIf="data.thumbnailUrl">
+      <img [src]="data.thumbnailUrl" [alt]="data.title" />
+    </div>
+
+    <p class="excerpt" *ngIf="data.excerpt">{{ data.excerpt }}</p>
+
+    <!-- contentHtml: bạn lưu HTML từ admin -->
+    <div class="content" [innerHTML]="data.contentHtml"></div>
+  </ng-container>
+</div>

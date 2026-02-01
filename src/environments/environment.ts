@@ -1,3 +1,4 @@
 export const environment = {
- apiBaseUrl: 'https://api.hoclaixebacha.vn'
+  production: true,
+  apiBaseUrl: 'https://api.hoclaixebacha.vn'
 };

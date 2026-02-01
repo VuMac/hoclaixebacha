@@ -1,0 +1,9 @@
+.wrap { max-width: 980px; margin: 0 auto; padding: 18px; }
+.back { display:inline-block; margin-bottom:12px; text-decoration:none; color:#22307f; font-weight:800; }
+.box { background:#fff; border:1px solid rgba(15,23,42,.08); border-radius:14px; padding:14px; }
+.error { color:#b91c1c; }
+.title { margin: 10px 0 6px; font-size: 30px; font-weight: 1000; color:#0f172a; }
+.meta { color: rgba(15,23,42,.6); font-size: 13px; margin-bottom: 12px; }
+.thumb img { width:100%; border-radius: 16px; border:1px solid rgba(15,23,42,.08); }
+.excerpt { font-size: 16px; color: rgba(15,23,42,.8); font-weight: 700; }
+.content { margin-top: 12px; line-height: 1.7; color: rgba(15,23,42,.9); }

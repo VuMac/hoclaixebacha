@@ -1,4 +1,4 @@
 export const environment = {
-  apiBaseUrl: 'https://api.hoclaixebacha.vn'
+  production: false,
+  apiBaseUrl: 'https://localhost:44321'
 };
-

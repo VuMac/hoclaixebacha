@@ -1,4 +1,50 @@
-/* ===== TOP ===== */
+/* =========================================================
+   DASHBOARD.CSS (FULL FILE) — copy/paste toàn bộ
+   Navbar tab (Giới thiệu / Khoá học) đồng bộ theme Practice:
+   Blue #22307f + Red #ed1c24
+========================================================= */
+
+/* ===== Theme vars ===== */
+:root {
+  --primary: #22307f;
+  --danger: #ed1c24;
+
+  --text: #0f172a;
+  --muted: #64748b;
+
+  --line: rgba(15, 23, 42, 0.10);
+  --bg: #f4f7fb;
+
+  --radius: 14px;
+}
+
+/* =========================================================
+   GLOBAL RESET (để nav sát viền - fix hở khoảng trống)
+   Nếu file này là scoped component -> dùng ::ng-deep
+========================================================= */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+:host ::ng-deep html,
+:host ::ng-deep body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 100%;
+  background: var(--bg) !important;
+}
+
+:host,
+:host * {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   TOPBAR (giữ nguyên style bạn có, chỉ sync nhẹ màu)
+========================================================= */
 .topbar {
   height: 64px;
   background: #fff;
@@ -6,19 +52,19 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 18px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .brand .logo {
   width: 38px;
   height: 38px;
-  border: 2px solid #1d78d6;
+  border: 2px solid var(--primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  color: #1d78d6;
+  color: var(--primary);
 }
 
 .right {
@@ -40,29 +86,53 @@
   background: #ddd;
 }
 
+/* =========================================================
+   NAV (Giới thiệu / Khoá học) — SYNC THEME PRACTICE
+========================================================= */
 .nav {
-  height: 54px;
-  background: #1976d2;
+  height: 56px;
+  background: #22307f;
+  border-bottom: 2px solid #ed1c24;
   display: flex;
   align-items: flex-end;
-  gap: 26px;
+  gap: 18px;
   padding: 0 20px;
+  width: 100%;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
 }
 
+/* Tab */
 .nav a {
   color: #fff;
-  padding: 14px 6px;
-  opacity: .9;
-  cursor: pointer;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 0.95rem;
+
+  padding: 14px 12px;
+  border-bottom: 3px solid transparent;
+  border-radius: 10px 10px 0 0;
+  opacity: 0.92;
+
+  transition: 0.18s ease;
 }
 
-.nav a.active {
-  border-bottom: 3px solid #ffb300;
+.nav a:hover {
   opacity: 1;
+  background: rgba(255, 255, 255, 0.10);
 }
 
+/* Active tab */
+.nav a.active {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.18);
+
+  /* Bạn muốn vàng thì giữ #ffb300, muốn đồng bộ đỏ thì đổi #ed1c24 */
+  border-bottom-color: #ffb300;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 .container {
   max-width: 1100px;
   margin: 24px auto;
@@ -86,9 +156,10 @@
   border: none;
   color: #fff;
   padding: 10px 16px;
-  border-radius: 6px;
-  font-weight: 800;
+  border-radius: 10px;
+  font-weight: 900;
   cursor: pointer;
+  box-shadow: 0 10px 18px rgba(255, 122, 47, 0.22);
 }
 
 .sub {
@@ -96,23 +167,28 @@
   color: #555;
 }
 
+/* =========================================================
+   TABLE
+========================================================= */
 .tbl {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
-  border: 1px solid #e8e8e8;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .tbl th {
-  background: #e9f6ff;
+  background: rgba(34, 48, 127, 0.06);
   text-align: left;
   padding: 12px;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .tbl td {
   padding: 12px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .blue {
@@ -125,7 +201,9 @@
   font-weight: 800;
 }
 
-/* ===== PRACTICE CARD ===== */
+/* =========================================================
+   PRACTICE CARD (giữ nguyên của bạn)
+========================================================= */
 .practice-card {
   display: flex;
   align-items: flex-end;
@@ -159,53 +237,51 @@
   margin-bottom: 12px;
 }
 
-/* ===== SELECT (FIX: KHÔNG CHỒNG VIỀN + CÓ CARET) ===== */
-/* ===== SELECT (FIX CHỐNG LỒNG / KHỚP CHIỀU CAO) ===== */
-.pc-control{
-  display:flex;
-  align-items:center;
-  gap:10px;
+/* ===== Select ===== */
+.pc-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-  height: 52px;               /* tăng nhẹ cho thoáng */
+  height: 52px;
   padding: 0 12px;
 
   border: 1px solid #d6dde8;
   border-radius: 14px;
   background: #f8fafc;
 
-  transition: .18s ease;
+  transition: 0.18s ease;
 }
 
-.pc-control:focus-within{
-  border-color:#3b82f6;
-  box-shadow: 0 0 0 4px rgba(59,130,246,.18);
-  background:#fff;
+.pc-control:focus-within {
+  border-color: rgba(34, 48, 127, 0.55);
+  box-shadow: 0 0 0 4px rgba(34, 48, 127, 0.14);
+  background: #fff;
 }
 
-.pc-icon{
-  width:34px;
-  height:34px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  background:#e8f1ff;
-  border:1px solid rgba(59,130,246,.22);
-  user-select:none;
+.pc-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(34, 48, 127, 0.08);
+  border: 1px solid rgba(34, 48, 127, 0.18);
+  user-select: none;
   flex: 0 0 auto;
 }
 
-.pc-select-wrap{
+.pc-select-wrap {
   position: relative;
   flex: 1;
-  height: 100%;               /* QUAN TRỌNG */
-  display:flex;
-  align-items:center;         /* QUAN TRỌNG */
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-/* select KHÔNG border, KHÔNG shadow để tránh “lồng” */
-.pc-select{
+.pc-select {
   width: 100%;
-  height: calc(100% - 10px);  /* chừa 5px trên + 5px dưới */
+  height: calc(100% - 10px);
   margin: 5px 0;
 
   border: 0 !important;
@@ -216,7 +292,7 @@
   font-weight: 800;
   color: #0f172a;
 
-  padding: 0 44px 0 14px;     /* chừa chỗ caret */
+  padding: 0 44px 0 14px;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -224,30 +300,26 @@
   box-shadow: none !important;
 }
 
-.pc-select:focus{
+.pc-select:focus {
   box-shadow: none !important;
   transform: none !important;
 }
 
-.pc-caret{
-  position:absolute;
+.pc-caret {
+  position: absolute;
   right: 14px;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events:none;
+  pointer-events: none;
   font-size: 14px;
-  opacity: .65;
+  opacity: 0.65;
 }
 
-.pc-select option{ font-weight: 700; }
-
-
-.pc-select:focus{
-  border-color: rgba(29,78,216,.55);
-  box-shadow: 0 0 0 4px rgba(29,78,216,.14), 0 12px 26px rgba(15,23,42,.10);
+.pc-select option {
+  font-weight: 700;
 }
 
-/* ===== BUTTON ===== */
+/* ===== Button ===== */
 .pc-btn {
   height: 44px;
   padding: 0 16px;
@@ -261,22 +333,22 @@
 
   color: #fff;
   font-weight: 900;
-  letter-spacing: .2px;
+  letter-spacing: 0.2px;
 
   background: linear-gradient(135deg, #1d78d6 0%, #0b61d1 60%, #0a4fb0 100%);
-  box-shadow: 0 10px 18px rgba(25, 118, 210, .25);
+  box-shadow: 0 10px 18px rgba(25, 118, 210, 0.25);
 
-  transition: .15s ease;
+  transition: 0.15s ease;
 }
 
 .pc-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 14px 24px rgba(25, 118, 210, .28);
+  box-shadow: 0 14px 24px rgba(25, 118, 210, 0.28);
 }
 
 .pc-btn:active {
   transform: translateY(0);
-  box-shadow: 0 10px 18px rgba(25, 118, 210, .25);
+  box-shadow: 0 10px 18px rgba(25, 118, 210, 0.25);
 }
 
 .pc-btn-icon {
@@ -286,7 +358,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, 0.18);
   font-size: 12px;
 }
 
@@ -311,7 +383,9 @@
   color: #0f172a;
 }
 
-/* ===== GRID ĐỀ ===== */
+/* =========================================================
+   GRID ĐỀ
+========================================================= */
 .set-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -325,7 +399,7 @@
   cursor: pointer;
   box-shadow: 0 8px 18px rgba(16, 24, 40, 0.06);
   border: 1px solid rgba(30, 64, 175, 0.10);
-  transition: transform .12s ease, box-shadow .12s ease;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .set-card:hover {
@@ -371,7 +445,7 @@
   font-size: 12px;
   font-weight: 800;
   color: #0f172a;
-  background: #ffffff;
+  background: #fff;
   border: 1px solid rgba(15, 23, 42, 0.12);
   padding: 4px 10px;
   border-radius: 999px;
@@ -386,13 +460,14 @@
   background: #1d4ed8;
   padding: 8px 12px;
   border-radius: 999px;
-  box-shadow: 0 10px 18px rgba(29, 78, 216, .18);
+  box-shadow: 0 10px 18px rgba(29, 78, 216, 0.18);
 }
 
 .set-btn:hover {
   filter: brightness(0.95);
 }
 
+/* Responsive grid */
 @media (max-width: 1100px) {
   .set-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -411,11 +486,13 @@
   }
 }
 
-/* ===== MODAL (GIỮ 1 LẦN, KHÔNG LẶP) ===== */
+/* =========================================================
+   MODAL
+========================================================= */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, .35);
+  background: rgba(0, 0, 0, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -429,14 +506,14 @@
   background: #fff;
   border-radius: 12px;
   padding: 22px 22px 18px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, .22);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
   text-align: center;
 }
 
 .modal-title {
   font-weight: 900;
   color: #d97706;
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
   margin-bottom: 10px;
   text-transform: uppercase;
 }
@@ -477,15 +554,18 @@
   color: #fff;
   font-weight: 900;
   cursor: pointer;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
 
 .modal-btn:hover {
-  filter: brightness(.95);
+  filter: brightness(0.95);
 }
 
-
-/* ===== Base layout (PC) ===== */
+/* =========================================================
+   (PHẦN EXAM PAGE bạn để trong file này mình GIỮ NGUYÊN)
+   Nếu nó thuộc trang khác thì nên tách file cho gọn,
+   nhưng copy/paste vẫn chạy bình thường.
+========================================================= */
 .exam-page {
   max-width: 1100px;
   margin: 18px auto;
@@ -499,9 +579,9 @@
 .exam-left,
 .exam-right {
   background: #fff;
-  border: 1px solid rgba(15, 23, 42, .10);
+  border: 1px solid rgba(15, 23, 42, 0.10);
   border-radius: 14px;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, .06);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 }
 
 .exam-left {
@@ -514,7 +594,6 @@
   top: 78px;
 }
 
-/* ===== Mobile: giống ảnh bạn gửi ===== */
 @media (max-width: 820px) {
   .exam-page {
     grid-template-columns: 1fr;
@@ -522,7 +601,6 @@
     margin: 10px auto;
   }
 
-  /* bỏ sticky sidebar, đưa xuống dưới */
   .exam-right {
     position: static;
     padding: 0;
@@ -531,36 +609,32 @@
     box-shadow: none;
   }
 
-  /* Card câu hỏi trông như app */
   .exam-left {
     border-radius: 16px;
     padding: 14px;
   }
 
-  /* ===== Sticky bottom bar ===== */
   .mobile-bottom {
     position: sticky;
     bottom: 0;
     z-index: 50;
-    background: rgba(244, 247, 251, .86);
+    background: rgba(244, 247, 251, 0.86);
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(15, 23, 42, .10);
+    border-top: 1px solid rgba(15, 23, 42, 0.10);
     padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
     margin: 0 -14px;
-    /* kéo full ngang nếu container có padding */
   }
 
   .mobile-bottom__inner {
     background: #fff;
-    border: 1px solid rgba(15, 23, 42, .10);
+    border: 1px solid rgba(15, 23, 42, 0.10);
     border-radius: 16px;
-    box-shadow: 0 14px 30px rgba(15, 23, 42, .10);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.10);
     padding: 10px;
     display: grid;
     gap: 10px;
   }
 
-  /* danh sách câu dạng chip */
   .question-nav {
     display: grid;
     grid-auto-flow: column;
@@ -579,7 +653,7 @@
     width: 44px;
     height: 44px;
     border-radius: 999px;
-    border: 1px solid rgba(15, 23, 42, .12);
+    border: 1px solid rgba(15, 23, 42, 0.12);
     background: #fff;
     font-weight: 900;
     display: grid;
@@ -593,7 +667,6 @@
     border-color: #ef4444;
   }
 
-  /* nút nộp bài mobile */
   .submit-btn {
     height: 46px;
     border: 0;
@@ -602,15 +675,14 @@
     background: #1d4ed8;
     color: #fff;
     cursor: pointer;
-    box-shadow: 0 12px 22px rgba(29, 78, 216, .18);
+    box-shadow: 0 12px 22px rgba(29, 78, 216, 0.18);
   }
 }
 
-/* Ảnh sa hình responsive */
 .question-image img {
   width: 100%;
   height: auto;
   display: block;
   border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, .10);
+  border: 1px solid rgba(15, 23, 42, 0.10);
 }
