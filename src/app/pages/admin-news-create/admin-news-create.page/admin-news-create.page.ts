@@ -7,7 +7,9 @@ import { AuthStore } from '../../../core/auth/auth.store';
 
 type NewsCreateForm = {
   title: string;
+  slug: string;          // ✅ thêm
   excerpt: string;
+  coverImage: string;    // ✅ thêm (URL)
   contentHtml: string;
   isPublished: boolean;
 };
@@ -25,7 +27,9 @@ export class AdminNewsCreatePage {
 
   form: NewsCreateForm = {
     title: '',
+    slug: '',
     excerpt: '',
+    coverImage: '',
     contentHtml: '',
     isPublished: true,
   };
@@ -53,7 +57,9 @@ export class AdminNewsCreatePage {
     this.error = '';
 
     const title = this.form.title.trim();
+    const slug = this.form.slug.trim();
     const excerpt = this.form.excerpt.trim();
+    const coverImage = this.form.coverImage.trim();
     const contentHtml = this.form.contentHtml.trim();
 
     if (!title || !excerpt || !contentHtml) {
@@ -69,14 +75,23 @@ export class AdminNewsCreatePage {
       fd.append('excerpt', excerpt);
       fd.append('contentHtml', contentHtml);
       fd.append('isPublished', String(this.form.isPublished));
+
+      // ✅ optional fields
+      if (slug) fd.append('slug', slug);
+      if (coverImage) fd.append('coverImage', coverImage);
+
+      // ✅ upload file nếu bạn dùng
       if (this.thumbnailFile) fd.append('thumbnail', this.thumbnailFile);
 
       const res = await this.api.create(fd);
       await this.router.navigateByUrl(`/news/${res.slug}`);
     } catch (e: any) {
-      // Nếu BE trả 401/403 -> đá về login cho admin
       const msg = e?.message || 'Đăng bài thất bại';
-      if (msg.includes('401') || msg.includes('403') || msg.toLowerCase().includes('unauthorized')) {
+      if (
+        msg.includes('401') ||
+        msg.includes('403') ||
+        msg.toLowerCase().includes('unauthorized')
+      ) {
         this.auth.clear();
         await this.router.navigateByUrl('/admin/login');
         return;
