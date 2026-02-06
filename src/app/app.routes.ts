@@ -12,18 +12,18 @@ import { NewsDetailPage } from './pages/news-detail/news-detail';
 
 import { AdminNewsCreatePage } from './pages/admin-news-create/admin-news-create.page/admin-news-create.page';
 
-// ✅ NEW: admin login page + guard
-
 import { AdminGuard } from './core/guards/admin.guard';
 import { AdminLoginPage } from './pages/admin-login/admin-login.page/admin-login.page';
+import { RegisterComponent } from './pages/register/register';
+import { AdminRegistrationsPage } from './pages/admin-registrations/admin-registrations.page/admin-registrations.page';
+
+// ✅ NEW: admin registrations page
 
 export const routes: Routes = [
   { path: '', redirectTo: 'intro', pathMatch: 'full' },
 
   { path: 'intro', component: IntroPage },
 
-  // (tuỳ bạn) login page cũ: nếu không dùng cho học viên thì có thể bỏ,
-  // còn hiện tại mình giữ nguyên để không vỡ flow cũ.
   { path: 'login', component: LoginPage },
 
   { path: 'dashboard', component: DashboardPage },
@@ -31,12 +31,20 @@ export const routes: Routes = [
   { path: 'result', component: ResultPage },
   { path: 'review', component: ReviewPage },
 
-  // user - PUBLIC
+  // public
+  { path: 'register', component: RegisterComponent },
   { path: 'news', component: NewsPage },
   { path: 'news/:slug', component: NewsDetailPage },
 
   // admin
   { path: 'admin/login', component: AdminLoginPage },
+
+  // ✅ NEW: admin registrations list
+  {
+    path: 'admin/registrations',
+    component: AdminRegistrationsPage,
+    canActivate: [AdminGuard],
+  },
 
   {
     path: 'admin/news/new',

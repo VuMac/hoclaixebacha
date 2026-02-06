@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AttemptDto, RealExamApi } from '../../core/api/real-exam.api';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 type UiAnswer = { id: string; content: string };
 type UiQuestion = {

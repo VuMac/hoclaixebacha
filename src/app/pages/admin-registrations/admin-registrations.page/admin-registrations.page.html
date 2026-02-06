@@ -1,0 +1,114 @@
+<section class="admin-wrap">
+  <header class="admin-head">
+    <div class="left">
+      <h1>Đăng ký khóa học</h1>
+      <p>Danh sách thông tin khách đăng ký từ form.</p>
+    </div>
+
+    <div class="right">
+      <a class="btn-link" routerLink="/intro">← Về trang chủ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="toolbar">
+      <div class="field">
+        <label>Tìm kiếm</label>
+        <input [(ngModel)]="q" placeholder="Tên / SĐT / hạng / ghi chú..." />
+      </div>
+
+      <div class="field">
+        <label>Trạng thái</label>
+        <select [(ngModel)]="status">
+          <option *ngFor="let s of statusOptions" [value]="s.value">{{ s.label }}</option>
+        </select>
+      </div>
+
+      <div class="field small">
+        <label>Page size</label>
+        <select [(ngModel)]="pageSize">
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+          <option [value]="50">50</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button class="btn" (click)="applyFilters()" [disabled]="loading">Lọc</button>
+        <button class="btn ghost" (click)="clearFilters()" [disabled]="loading">Reset</button>
+      </div>
+    </div>
+
+    <div class="state" *ngIf="loading">Đang tải...</div>
+    <div class="state err" *ngIf="!loading && error">{{ error }}</div>
+
+    <div class="table-wrap" *ngIf="!loading && !error">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Khách</th>
+            <th>Liên hệ</th>
+            <th>Hạng</th>
+            <th>Ghi chú</th>
+            <th>Ngày</th>
+            <th style="width: 180px;">Trạng thái</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let it of items">
+            <td class="name">
+              <div class="strong">{{ it.fullName }}</div>
+              <div class="muted">ID: {{ it.id }}</div>
+            </td>
+
+            <td>
+              <div class="strong">{{ it.phone }}</div>
+            </td>
+
+            <td>
+              <span class="pill">{{ licenseLabel(it.licenseCode) }}</span>
+            </td>
+
+            <td class="note">
+              {{ it.note || '—' }}
+            </td>
+
+            <td>
+              {{ it.createdAt | date:'dd/MM/yyyy HH:mm' }}
+            </td>
+
+            <td>
+              <div class="status-row">
+                <span class="badge" [attr.data-status]="it.status">{{ statusBadge(it.status) }}</span>
+
+                <select
+                  class="status-select"
+                  [ngModel]="it.status"
+                  (ngModelChange)="changeRowStatus(it, $event)"
+                >
+                  <option *ngFor="let s of rowStatusOptions" [value]="s.value">{{ s.label }}</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="items.length === 0">
+            <td colspan="6" class="empty">Chưa có dữ liệu.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pager" *ngIf="!loading && !error">
+      <div class="muted">
+        Tổng: <b>{{ total }}</b> — Trang <b>{{ page }}</b>/<b>{{ totalPages }}</b>
+      </div>
+
+      <div class="pager-actions">
+        <button class="btn ghost" (click)="prev()" [disabled]="page <= 1 || loading">← Trước</button>
+        <button class="btn ghost" (click)="next()" [disabled]="page >= totalPages || loading">Sau →</button>
+      </div>
+    </div>
+  </div>
+</section>

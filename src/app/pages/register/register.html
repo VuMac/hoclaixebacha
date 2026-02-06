@@ -1,0 +1,101 @@
+<section class="reg-page" id="regForm">
+  <div class="reg-wrap">
+
+    <header class="reg-head">
+      <h2>Đăng ký khóa học</h2>
+      <p>Vui lòng nhập thông tin để trung tâm liên hệ tư vấn & xếp lịch phù hợp.</p>
+    </header>
+
+    <div class="reg-card">
+      <div class="reg-card__bar">
+        <div class="reg-card__barLeft">
+          <div class="reg-card__barTitle">Thông tin liên hệ</div>
+          <div class="reg-card__barSub">Điền đúng để được tư vấn nhanh</div>
+        </div>
+        <div class="reg-card__barNote">* Bắt buộc</div>
+      </div>
+
+      <form class="reg-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="reg-grid">
+          <!-- Họ tên -->
+          <div class="field" [class.is-invalid]="form.controls.fullName.touched && form.controls.fullName.invalid">
+            <label class="lbl" for="fullName">Họ tên <span class="req">*</span></label>
+
+            <div class="control">
+              <input id="fullName" type="text" formControlName="fullName" placeholder="VD: Nguyễn Văn A"
+                autocomplete="name" />
+            </div>
+
+            <div class="help">
+              <span class="err" *ngIf="form.controls.fullName.touched && form.controls.fullName.invalid">
+                Vui lòng nhập họ tên (tối thiểu 2 ký tự).
+              </span>
+            </div>
+          </div>
+
+          <!-- Số điện thoại -->
+          <div class="field" [class.is-invalid]="form.controls.phone.touched && form.controls.phone.invalid">
+            <label class="lbl" for="phone">Số điện thoại <span class="req">*</span></label>
+
+            <div class="control">
+              <input id="phone" type="tel" formControlName="phone" placeholder="VD: 0987654321" autocomplete="tel"
+                inputmode="tel" />
+            </div>
+
+            <div class="help">
+              <span class="err" *ngIf="form.controls.phone.touched && form.controls.phone.invalid">
+                SĐT chưa đúng định dạng (0/+84 + 9 số).
+              </span>
+            </div>
+          </div>
+
+          <!-- Chọn hạng xe -->
+          <div class="field"
+            [class.is-invalid]="form.controls.licenseClass.touched && form.controls.licenseClass.invalid">
+            <label class="lbl" for="licenseClass">Chọn hạng xe <span class="req">*</span></label>
+
+            <div class="control control--select">
+              <select id="licenseClass" formControlName="licenseClass">
+                <option value="" disabled>-- Chọn hạng xe --</option>
+                <option *ngFor="let c of licenseClasses" [value]="c.value">
+                  {{ c.label }}
+                </option>
+              </select>
+              <span class="select-ic" aria-hidden="true">▾</span>
+            </div>
+
+            <div class="help">
+              <span class="err" *ngIf="form.controls.licenseClass?.touched && form.controls.licenseClass?.invalid">
+                Vui lòng chọn hạng xe muốn học.
+              </span>
+            </div>
+          </div>
+
+          <!-- Ghi chú -->
+          <div class="field field--full">
+            <label class="lbl" for="note">Ghi chú (tuỳ chọn)</label>
+
+            <div class="control">
+              <textarea id="note" rows="5" formControlName="note"
+                placeholder="Bạn muốn học giờ nào? Có kinh nghiệm lái chưa?"></textarea>
+            </div>
+
+            <div class="help">
+              <!-- giữ layout đồng đều -->
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn--primary btn--lg" type="submit" [disabled]="form.invalid || loading">
+          {{ loading ? 'Đang gửi...' : 'Gửi đăng ký' }}
+        </button>
+
+        <div class="reg-note" role="note">
+          <span class="dot"></span>
+          <span>Chúng tôi chỉ dùng thông tin để tư vấn khóa học, không spam.</span>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>

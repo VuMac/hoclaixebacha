@@ -1,5 +1,7 @@
-<div class="page">
-  <!-- NAVBAR -->
+<div class="page" id="top">
+  <!-- =========================
+       NAVBAR
+  ========================== -->
   <header class="navbar">
     <div class="navbar-container">
       <!-- Brand -->
@@ -9,6 +11,7 @@
         </div>
         <div class="brand-info">
           <span class="brand-name">Văn Phòng Tư Vấn Học Lái Xe Bắc Hà</span>
+          <span class="brand-sub">Đào tạo • Luyện thi GPLX • Tư vấn lộ trình</span>
         </div>
       </div>
 
@@ -23,37 +26,24 @@
     </div>
   </header>
 
-  <main id="top">
-    <!-- QUICK CARDS -->
-    <section class="block">
-      <div class="block__head">
-        <h2>Các hạng xe phổ biến</h2>
-        <p>Chọn một mục để xem mô tả nhanh và vào luyện đề.</p>
-      </div>
+  <!-- =========================
+       HERO BANNER (FULL WIDTH)
+       ✅ ĐÃ XOÁ 2 NÚT TRÊN BANNER
+  ========================== -->
+  <section class="hero-banner" aria-label="Banner học lái xe" style="--hero-img: url('assets/banner.jpg');">
+    <img class="hero-banner__img" src="assets/banner.jpg" alt="Học lái xe Bắc Hà – Lộ trình rõ ràng, thi đậu tự tin"
+      loading="eager" fetchpriority="high" />
+  </section>
 
-      <div class="quick-grid">
-        <button class="quick-item" *ngFor="let c of cards" type="button" [disabled]="c.disabled"
-          (click)="!c.disabled && go(c.cta.link)">
-          <span class="quick-badge" *ngIf="c.badge">{{ c.badge }}</span>
-          <span class="quick-icon" *ngIf="c.icon">{{ c.icon }}</span>
-
-          <span class="quick-content">
-            <span class="quick-title">{{ c.title }}</span>
-            <span class="quick-sub">{{ c.subtitle }}</span>
-          </span>
-        </button>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="block about" id="about">
-      <div class="block__head">
-        <h2>Uy tín ở cái tâm – Chất lượng ở cái tầm</h2>
-        <p>Bắc Hà luôn đồng hành cùng bạn để tự tin học lái xe và đạt kết quả tốt.</p>
-      </div>
+  <!-- =========================
+     THAY THẾ CHO "CHÚNG TÔI CAM KẾT"
+     (block trắng: chips + mini CTA + stats + lý do)
+  ========================== -->
+  <section class="block about about--spotlight" id="about" aria-label="Giới thiệu">
+    <div class="container">
 
       <!-- Stats -->
-      <div class="about-stats">
+      <div class="about-stats" aria-label="Thống kê nổi bật">
         <div class="stat">
           <div class="stat-num">15+</div>
           <div class="stat-text">năm kinh nghiệm đào tạo chuyên nghiệp</div>
@@ -85,7 +75,7 @@
         <h3 class="about-title">Lý do nên chọn Bắc Hà</h3>
 
         <div class="reason-grid">
-          <div class="reason">
+          <div class="reason reason--hot">
             <div class="reason-no">01</div>
             <div class="reason-main">Phương pháp hướng dẫn dễ hiểu, dễ tiếp thu</div>
             <div class="reason-sub">
@@ -93,7 +83,7 @@
             </div>
           </div>
 
-          <div class="reason">
+          <div class="reason reason--hot">
             <div class="reason-no">02</div>
             <div class="reason-main">Đội ngũ giáo viên giỏi và tâm huyết</div>
             <div class="reason-sub">
@@ -101,7 +91,7 @@
             </div>
           </div>
 
-          <div class="reason">
+          <div class="reason reason--hot">
             <div class="reason-no">03</div>
             <div class="reason-main">Xe tập lái mới – Sân tập đạt tiêu chuẩn</div>
             <div class="reason-sub">
@@ -109,7 +99,7 @@
             </div>
           </div>
 
-          <div class="reason">
+          <div class="reason reason--hot">
             <div class="reason-no">04</div>
             <div class="reason-main">Đánh giá năng lực giáo viên định kỳ</div>
             <div class="reason-sub">
@@ -117,7 +107,7 @@
             </div>
           </div>
 
-          <div class="reason">
+          <div class="reason reason--hot">
             <div class="reason-no">05</div>
             <div class="reason-main">Chương trình và tài liệu tiêu chuẩn</div>
             <div class="reason-sub">
@@ -125,7 +115,7 @@
             </div>
           </div>
 
-          <div class="reason">
+          <div class="reason reason--hot">
             <div class="reason-no">06</div>
             <div class="reason-main">Cam kết chất lượng dạy và học</div>
             <div class="reason-sub">
@@ -134,50 +124,98 @@
           </div>
         </div>
 
-        <div class="about-actions">
-          <button class="btn btn--primary" type="button" (click)="go('/dashboard')">
-            Vào luyện đề ngay
-          </button>
+        <!-- ✅ Xoá nút dưới này để không trùng CTA -->
+        <!-- <div class="about-actions">
+          <button class="btn btn--primary" type="button" (click)="scrollTo('contact')">Nhận tư vấn</button>
+        </div> -->
+      </div>
+    </div>
 
-          <button class="btn btn--ghost" type="button" (click)="scrollTo('contact')">
-            Nhận tư vấn
+
+    <section class="block about about--spotlight" id="about" aria-label="Giới thiệu">
+      <div class="container">
+        <!-- ✅ MINI CTA: đặt xuống dưới dãy ô -->
+        <div class="about-mini-cta" aria-label="Nhận tư vấn nhanh">
+          <div class="about-mini-cta__text">
+            <div class="about-mini-cta__title">🎁 Tặng lộ trình học + báo phí minh bạch trong 2 phút</div>
+            <div class="about-mini-cta__sub">
+              Để lại thông tin, Bắc Hà tư vấn nhanh – đúng hạng bằng, đúng nhu cầu (không làm phiền).
+            </div>
+          </div>
+
+          <button class="btn btn--mini" type="button" (click)="scrollTo('contact')">
+            Nhận tư vấn miễn phí
+          </button>
+        </div>
+
+
+      </div>
+    </section>
+  </section>
+
+  <main>
+    <!-- =========================
+         QUICK CARDS
+    ========================== -->
+    <section class="block quick" aria-label="Danh mục nhanh">
+      <div class="container">
+        <div class="block__head">
+          <h2>Các hạng xe phổ biến</h2>
+          <p>Chọn một mục để xem mô tả nhanh và vào luyện đề.</p>
+        </div>
+
+        <div class="quick-grid">
+          <button class="quick-item" *ngFor="let c of cards" type="button" [disabled]="c.disabled"
+            (click)="!c.disabled && go(c.cta.link)">
+            <span class="quick-badge" *ngIf="c.badge">{{ c.badge }}</span>
+            <span class="quick-icon" *ngIf="c.icon">{{ c.icon }}</span>
+
+            <span class="quick-content">
+              <span class="quick-title">{{ c.title }}</span>
+              <span class="quick-sub">{{ c.subtitle }}</span>
+              <span class="quick-cta" *ngIf="c.cta?.label">{{ c.cta.label }} →</span>
+            </span>
           </button>
         </div>
       </div>
     </section>
 
     <!-- =========================
-         THÔNG TIN KHÓA HỌC (LƯỚI CARD + MODAL)
+         COURSE CARDS (lưới + modal)
     ========================== -->
-    <section class="coursecards" id="coursecards">
-      <div class="coursecards-head">
-        <h2>THÔNG TIN KHÓA HỌC LÁI XE</h2>
-      </div>
+    <section class="coursecards" id="coursecards" aria-label="Khóa học lái xe">
+      <div class="container">
+        <div class="coursecards-head">
+          <h2>THÔNG TIN KHÓA HỌC LÁI XE</h2>
+          <p>Chọn khóa học phù hợp hạng bằng – xem chi tiết lộ trình & học phí.</p>
+        </div>
 
-      <div class="coursecards-grid">
-        <article class="ccard" *ngFor="let item of courseCards">
-          <div class="ccard-media">
-            <img [src]="item.image" [alt]="item.title" />
-          </div>
-
-          <div class="ccard-body">
-            <div class="ccard-title">✨ {{ item.title }}</div>
-
-            <div class="ccard-row">
-              <span class="ccard-ic">⏱</span>
-              <span>Thời gian khóa học: <b>{{ item.duration }}</b></span>
+        <div class="coursecards-grid">
+          <article class="ccard" *ngFor="let item of courseCards">
+            <div class="ccard-media">
+              <img [src]="item.image" [alt]="item.title" />
             </div>
 
-            <div class="ccard-row">
-              <span class="ccard-ic">💰</span>
-              <span>Học phí: <b class="ccard-price">{{ item.fee }}</b></span>
-            </div>
+            <div class="ccard-body">
+              <div class="ccard-title">✨ {{ item.title }}</div>
 
-            <button class="ccard-btn" type="button" (click)="openCourseDetail(item)">
-              Chi Tiết
-            </button>
-          </div>
-        </article>
+              <div class="ccard-row">
+                <span class="ccard-ic">⏱</span>
+                <span>Thời gian khóa học: <b>{{ item.duration }}</b></span>
+              </div>
+
+              <div class="ccard-row">
+                <span class="ccard-ic">💰</span>
+                <span>Học phí: <b class="ccard-price">{{ item.fee }}</b></span>
+              </div>
+
+              <!-- ✅ NÚT CHI TIẾT (đảm bảo click được) -->
+              <button class="ccard-btn" type="button" (click)="openCourseDetail(item)">
+                Chi tiết
+              </button>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -194,67 +232,118 @@
             <b>Học phí:</b> {{ selectedCourse?.fee }}
           </div>
 
+          <!-- ✅ Nội dung chi tiết -->
           <div class="modal-text" [innerHTML]="selectedCourse?.detailHtml"></div>
         </div>
 
         <div class="modal-actions">
-          <button class="btn btn--ghost" type="button" (click)="closeCourseDetail()">
-            Đóng
-          </button>
-          <button class="btn btn--primary" type="button" (click)="scrollTo('contact'); closeCourseDetail()">
-            Đăng ký tư vấn
+          <button class="btn btn--ghost" type="button" (click)="closeCourseDetail()">Đóng</button>
+
+          <!-- ✅ Nút Đăng ký học ngay ở trong popup -->
+          <button class="btn btn--primary" type="button" (click)="registerNow(selectedCourse)">
+            Đăng ký học ngay
           </button>
         </div>
       </div>
     </div>
 
     <!-- =========================
-         CƠ SỞ ĐÀO TẠO LÁI XE
+         CƠ SỞ ĐÀO TẠO
     ========================== -->
-    <section class="centers" id="centers">
-      <div class="centers-head">
-        <h2>CÁC CƠ SỞ ĐÀO TẠO CỦA TRUNG TÂM</h2>
-        <p>Danh sách địa điểm học thực hành tại Bắc Ninh và Hà Nội</p>
-      </div>
+    <section class="centers" id="centers" aria-label="Cơ sở đào tạo">
+      <div class="container">
+        <div class="centers-head">
+          <h2>CÁC CƠ SỞ ĐÀO TẠO CỦA TRUNG TÂM</h2>
+          <p>Danh sách địa điểm học thực hành tại Bắc Ninh và Hà Nội</p>
+        </div>
 
-      <div class="centers-table">
-        <table>
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>Địa điểm cơ sở đào tạo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td>Số 89 Ngô Gia Tự, Phường Tam Sơn, Tỉnh Bắc Ninh</td></tr>
-            <tr><td>2</td><td>Khu vực khu công nghiệp Yên Phong, Tỉnh Bắc Ninh</td></tr>
-            <tr><td>3</td><td>Khu vực khu công nghiệp Quế Võ, Tỉnh Bắc Ninh</td></tr>
-            <tr><td>4</td><td>Khu vực khu công nghiệp Quang Châu, Tỉnh Bắc Ninh</td></tr>
-            <tr><td>5</td><td>Khu vực Thuận Thành, Tỉnh Bắc Ninh</td></tr>
-            <tr><td>6</td><td>Khu vực Tiên Du, Tỉnh Bắc Ninh</td></tr>
-            <tr><td>7</td><td>Khu vực Sóc Sơn, TP Hà Nội</td></tr>
-            <tr><td>8</td><td>Khu vực Sài Đồng, TP Hà Nội</td></tr>
-            <tr><td>9</td><td>Khu vực Thanh Trì, TP Hà Nội</td></tr>
-            <tr><td>10</td><td>Khu vực Hoàng Mai, TP Hà Nội</td></tr>
-            <tr><td>11</td><td>Khu vực Đông Anh, TP Hà Nội</td></tr>
-            <tr><td>12</td><td>Khu vực Cầu Giấy, TP Hà Nội</td></tr>
-            <tr><td>13</td><td>Khu vực Hoàn Kiếm, TP Hà Nội</td></tr>
-            <tr><td>14</td><td>Khu vực Hà Đông, TP Hà Nội</td></tr>
-            <tr><td>15</td><td>Khu vực Thanh Xuân, TP Hà Nội</td></tr>
-            <tr><td>16</td><td>Khu vực Trâu Quỳ, Ocean Pack, TP Hà Nội</td></tr>
-            <tr><td>17</td><td>Khu vực Gia Lâm, TP Hà Nội</td></tr>
-          </tbody>
-        </table>
+        <div class="centers-table">
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Địa điểm cơ sở đào tạo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Số 89 Ngô Gia Tự, Phường Tam Sơn, Tỉnh Bắc Ninh</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Khu vực khu công nghiệp Yên Phong, Tỉnh Bắc Ninh</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Khu vực khu công nghiệp Quế Võ, Tỉnh Bắc Ninh</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Khu vực khu công nghiệp Quang Châu, Tỉnh Bắc Ninh</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Khu vực Thuận Thành, Tỉnh Bắc Ninh</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Khu vực Tiên Du, Tỉnh Bắc Ninh</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Khu vực Sóc Sơn, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Khu vực Sài Đồng, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Khu vực Thanh Trì, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Khu vực Hoàng Mai, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Khu vực Đông Anh, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Khu vực Cầu Giấy, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Khu vực Hoàn Kiếm, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>Khu vực Hà Đông, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>Khu vực Thanh Xuân, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>Khu vực Trâu Quỳ, Ocean Pack, TP Hà Nội</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>Khu vực Gia Lâm, TP Hà Nội</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
-   
-    
-
     <!-- =========================
-         TIPS
+         TIPS + CTA
     ========================== -->
-    <section class="bottom" id="tips">
+    <section class="bottom" id="tips" aria-label="Gợi ý học hiệu quả">
       <div class="bottom-wrap">
         <!-- Left: Tips -->
         <div class="bottom-card">
@@ -292,31 +381,36 @@
         </div>
 
         <!-- Right: CTA -->
-        <div class="bottom-card bottom-card--cta">
+        <div class="bottom-card bottom-card--cta" id="contact">
           <div class="cta-head">
-            <h3>Sẵn sàng luyện thi ngay?</h3>
-            <p>Vào danh sách đề, làm thử và xem đáp án chi tiết.</p>
+            <h3>Sẵn sàng bắt đầu học?</h3>
+            <p>Đăng ký tư vấn để nhận lộ trình phù hợp hạng bằng và ưu đãi hiện có.</p>
           </div>
 
           <div class="cta-actions">
-            <button class="btn btn--primary btn--lg" type="button" (click)="go('/dashboard')">
-              🚀 Vào danh sách đề
-            </button>
-
-            <button class="btn btn--ghost btn--lg" type="button" (click)="scrollTo('about')">
-              Tìm hiểu thêm
-            </button>
+            <button class="btn btn--primary btn--lg" type="button" (click)="go('/dashboard')">🚀 Vào danh sách
+              đề</button>
+            <button class="btn btn--ghost btn--lg" type="button" (click)="go('/register')">Đăng ký khóa học</button>
           </div>
 
           <div class="cta-note">
             <span class="dot"></span>
             <span>Hỗ trợ tư vấn & lộ trình học phù hợp từng hạng bằng.</span>
           </div>
+
+          <div class="contact-mini">
+            <a class="contact-mini__item" href="tel:0393655992">📞 0393 655 992</a>
+            <a class="contact-mini__item" href="https://zalo.me/843936555992" target="_blank" rel="noopener">💬 Chat
+              Zalo</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- =========================
+       FOOTER
+  ========================== -->
   <footer class="footer-pro">
     <div class="footer-pro__inner">
       <div class="footer-cols">
@@ -342,25 +436,23 @@
   </footer>
 
   <!-- =========================
-       FLOATING CONTACT BOXES (Call / Zalo / FB)
-       ✅ giống kiểu bạn gửi ảnh
-       ✅ ẩn khi mở modal
+       FLOATING CONTACT BOXES (FAB)
+       ẩn khi mở modal
   ========================== -->
   <div class="fab-stack" *ngIf="!isCourseModalOpen" aria-label="Liên hệ nhanh">
     <a class="fab fab--call" href="tel:0393655992" aria-label="Gọi 0393655992" title="Gọi 0393655992">
       📞
-      <span class="fab-tip">Gọi ngay</span>
+      <span class="fab-tip">Gọi ngay</span>0393655992
     </a>
 
-    <a class="fab fab--zalo" href="https://zalo.me/84393655592" target="_blank" rel="noopener"
-      aria-label="Chat Zalo" title="Chat Zalo">
+    <a class="fab fab--zalo" href="https://zalo.me/843936555992" target="_blank" rel="noopener" aria-label="Chat Zalo"
+      title="Chat Zalo">
       Z
       <span class="fab-tip">Chat Zalo</span>
     </a>
 
-    <!-- ✅ bạn thay link fanpage thật ở đây -->
-    <a class="fab fab--fb" href="https://web.facebook.com/profile.php?id=100063705557692&_rdc=1&_rdr#" target="_blank" rel="noopener"
-      aria-label="Facebook" title="Facebook">
+    <a class="fab fab--fb" href="https://web.facebook.com/profile.php?id=100063705557692&_rdc=1&_rdr#" target="_blank"
+      rel="noopener" aria-label="Facebook" title="Facebook">
       f
       <span class="fab-tip">Facebook</span>
     </a>

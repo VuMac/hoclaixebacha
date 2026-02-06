@@ -17,5 +17,9 @@ export class AuthStore {
 
   get token() { return localStorage.getItem(this.TOKEN); }
   get role() { return localStorage.getItem(this.ROLE); }
-  get isAdmin() { return this.role === 'Admin' && !!this.token; }
+
+  get isAdmin() {
+    const r = (this.role || '').toLowerCase().trim();
+    return r === 'admin' && !!this.token;
+  }
 }

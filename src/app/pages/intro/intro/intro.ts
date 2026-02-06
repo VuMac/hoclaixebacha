@@ -3,7 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
-/** ===== Types ===== */
+/** =========================
+ *  Types
+ *  ========================= */
+type CTA = {
+  label: string;
+  link: string; // '/route' hoặc '#anchor'
+};
+
 type QuickCard = {
   icon?: string;
   title: string;
@@ -11,6 +18,7 @@ type QuickCard = {
   cta: { label: string; link: string };
   badge?: string;
   disabled?: boolean;
+  art?: string; // ảnh nhỏ
 };
 
 type CourseCard = {
@@ -20,9 +28,9 @@ type CourseCard = {
   fee: string;
   image: string;
   icon?: string;
-  alt?: boolean;
-  imageError?: boolean;
   detailHtml: string;
+
+  imageError?: boolean;
 };
 
 @Component({
@@ -33,32 +41,40 @@ type CourseCard = {
   styleUrls: ['./intro.css'],
 })
 export class IntroPage implements OnDestroy {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   /** =========================
-   *  CONTACT (call / zalo / copy)
+   *  CONTACT
    *  ========================= */
   contactPhone = '0393655992';
 
   copiedText = '';
   private copyTimer: any;
 
+  /** Zalo link chuẩn: 84 + bỏ số 0 đầu */
   get zaloLink(): string {
-    // format 84xxxxxxxxx cho ổn trên nhiều máy
-    const phone84 = this.contactPhone.startsWith('0')
-      ? '84' + this.contactPhone.slice(1)
-      : this.contactPhone;
+    const phone = (this.contactPhone || '').trim();
+    if (!phone) return 'https://zalo.me';
 
+    const phone84 = phone.startsWith('0') ? '84' + phone.slice(1) : phone;
     return `https://zalo.me/${phone84}`;
   }
 
+  get telLink(): string {
+    const phone = (this.contactPhone || '').trim();
+    return phone ? `tel:${phone}` : 'tel:';
+  }
+
   async copyTextFn(text: string) {
+    const value = (text || '').trim();
+    if (!value) return;
+
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(value);
     } catch {
       // fallback cho browser cũ
       const ta = document.createElement('textarea');
-      ta.value = text;
+      ta.value = value;
       ta.style.position = 'fixed';
       ta.style.left = '-9999px';
       document.body.appendChild(ta);
@@ -68,32 +84,40 @@ export class IntroPage implements OnDestroy {
       document.body.removeChild(ta);
     }
 
-    this.copiedText = text;
+    this.copiedText = value;
     clearTimeout(this.copyTimer);
     this.copyTimer = setTimeout(() => (this.copiedText = ''), 1500);
   }
 
-  ngOnDestroy(): void {
-    clearTimeout(this.copyTimer);
-    document.body.style.overflow = '';
+  copyText(text: string) {
+    return this.copyTextFn(text);
   }
 
   /** =========================
-   *  CONSULT FORM (nếu bạn còn dùng ở chỗ khác)
+   *  CONSULT FORM (nếu bạn dùng)
    *  ========================= */
   consultName = '';
   consultPhone = '';
 
+  // ✅ Optional: lưu khóa học đã chọn để tư vấn nhanh
+  consultCourse = ''; // bạn có thể bind vào input hidden / text nếu muốn
+
   submitConsult(e: Event) {
     e.preventDefault();
+
     const name = (this.consultName || '').trim();
     const phone = (this.consultPhone || '').trim();
     if (!name || !phone) return;
 
-    alert(`Đã gửi đăng ký tư vấn!\nHọ tên: ${name}\nĐiện thoại: ${phone}`);
+    const courseTxt = (this.consultCourse || '').trim();
+    alert(
+      `Đã gửi đăng ký tư vấn!\nHọ tên: ${name}\nĐiện thoại: ${phone}${courseTxt ? `\nKhóa học: ${courseTxt}` : ''
+      }`
+    );
 
     this.consultName = '';
     this.consultPhone = '';
+    this.consultCourse = '';
   }
 
   /** =========================
@@ -147,7 +171,7 @@ export class IntroPage implements OnDestroy {
   ];
 
   /** =========================
-   *  THÔNG TIN KHÓA HỌC (grid + modal)
+   *  COURSE CARDS (grid + modal)
    *  ========================= */
   courseCards: CourseCard[] = [
     {
@@ -157,13 +181,12 @@ export class IntroPage implements OnDestroy {
       fee: '800.000 VNĐ',
       image: 'assets/A1.jpg',
       icon: '🛵',
-      alt: true,
       detailHtml: `
         <p><b>Xe mô tô hai bánh</b> có dung tích xi-lanh đến 125 cm³ hoặc công suất động cơ điện đến 11 kW.</p>
         <h4>1. Điều kiện</h4>
         <ul>
-          <li>Là công dân Việt Nam hoặc người nước ngoài cư trú / học tập / làm việc hợp pháp tại Việt Nam.</li>
           <li>Đủ 18 tuổi (tính đến ngày dự thi sát hạch).</li>
+          <li>Cư trú / học tập / làm việc hợp pháp tại Việt Nam.</li>
         </ul>
         <h4>2. Hồ sơ</h4>
         <ul>
@@ -196,7 +219,7 @@ export class IntroPage implements OnDestroy {
       `,
     },
     {
-      id: 'B01',
+      id: 'B_AT',
       title: 'Học lái xe ô tô hạng B số tự động',
       duration: '3 tháng',
       fee: '16.000.000 VNĐ',
@@ -212,13 +235,12 @@ export class IntroPage implements OnDestroy {
       `,
     },
     {
-      id: 'B_MT_CARD',
+      id: 'B_MT',
       title: 'Học lái xe ô tô hạng B số sàn',
       duration: '3 tháng',
       fee: '17.000.000 VNĐ',
       image: 'assets/BB.jpg',
       icon: '🚙',
-      alt: true,
       detailHtml: `
         <p>Khóa học xe số sàn, phù hợp học viên muốn kỹ năng lái tốt & chắc.</p>
         <h4>Nội dung</h4>
@@ -229,13 +251,12 @@ export class IntroPage implements OnDestroy {
       `,
     },
     {
-      id: 'C1_CARD',
+      id: 'C1',
       title: 'Học lái xe ô tô hạng C1',
       duration: '3 tháng',
       fee: '21.000.000 VNĐ',
       image: 'assets/C.jpg',
       icon: '🚚',
-      alt: true,
       detailHtml: `
         <p>Khóa học dành cho học viên đăng ký hạng C1 theo quy định hiện hành.</p>
         <h4>Nội dung</h4>
@@ -263,32 +284,63 @@ export class IntroPage implements OnDestroy {
     },
   ];
 
+  /** =========================
+   *  MODAL
+   *  ========================= */
   isCourseModalOpen = false;
   selectedCourse: CourseCard | null = null;
 
-  openCourseDetail(c: CourseCard) {
-    this.selectedCourse = c;
+  openCourseDetail(course: CourseCard) {
+    this.selectedCourse = course;
     this.isCourseModalOpen = true;
-    document.body.style.overflow = 'hidden';
+    this.lockBodyScroll(true);
   }
 
   closeCourseDetail() {
     this.isCourseModalOpen = false;
     this.selectedCourse = null;
-    document.body.style.overflow = '';
+    this.lockBodyScroll(false);
   }
 
+  private lockBodyScroll(lock: boolean) {
+    document.body.style.overflow = lock ? 'hidden' : '';
+  }
+
+  /**
+   * ✅ NEW: Đăng ký học ngay (trong popup)
+   * - đóng modal
+   * - scroll xuống contact
+   * - lưu khóa học để bạn dùng (tùy chọn)
+   */
+  registerNow(course: CourseCard | null) {
+    if (!course) return;
+
+    // đóng modal trước cho sạch UI
+    this.closeCourseDetail();
+
+    // chuyển trang + truyền khóa học
+    this.router.navigate(['/register'], {
+      queryParams: {
+        courseId: course.id,
+        title: course.title,
+        fee: course.fee,
+        duration: course.duration,
+      },
+    });
+  }
   /** =========================
    *  NAV HELPERS
    *  ========================= */
   go(url: string) {
     if (!url) return;
 
+    // anchor
     if (url.startsWith('#')) {
       this.scrollTo(url.substring(1));
       return;
     }
 
+    // internal route
     this.router.navigateByUrl(url);
   }
 
@@ -298,8 +350,11 @@ export class IntroPage implements OnDestroy {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  /** Nếu bạn dùng ở HTML: (click)="copyText('039...')" */
-  copyText(text: string) {
-    return this.copyTextFn(text);
+  /** =========================
+   *  LIFECYCLE
+   *  ========================= */
+  ngOnDestroy(): void {
+    clearTimeout(this.copyTimer);
+    this.lockBodyScroll(false);
   }
 }
